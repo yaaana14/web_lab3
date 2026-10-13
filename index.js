@@ -171,6 +171,15 @@ program
     if (options.onlineOnly) entries = entries.filter((e) => e.lesson.format === 'online');
     printEntries(entries, `Занять викладача "${name}" не знайдено.`);
   });
+  program
+  .command('week')
+  .description('Показати розклад для чисельника або знаменника (разом зі щотижневими)')
+  .argument('<parity>', 'Тиждень: numerator (чисельник) або denominator (знаменник)', parseParity)
+  .action((parity, options, command) => {
+    const entries = getEntries(command).filter((e) =>
+      e.lesson.weekType === parity || e.lesson.weekType === 'everyWeek');
+    printEntries(entries, 'Занять не знайдено.');
+  });
 // ---------- Обробка помилок ----------
 
 function quoted(message) {
