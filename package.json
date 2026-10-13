@@ -1,0 +1,12 @@
+{
+  "name": "web_lab3",
+  "version": "1.0.0",
+  "description": "CLI для перегляду розкладу занять",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "commander": "^15.0.0"
+  }
+}
