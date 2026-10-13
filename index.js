@@ -125,8 +125,6 @@ program
     if (options.limit !== undefined) entries = entries.slice(0, options.limit);
     printEntries(entries, 'Занять не знайдено.');
   });
-
-// ---------- Обробка помилок ----------
 program
   .command('show')
   .description('Показати одне заняття повністю (за номером у файлі)')
@@ -153,6 +151,28 @@ program
       ? JSON.stringify(result.value, null, 2)
       : String(result.value));
   });
+  program
+  .command('day')
+  .description('Показати заняття за обраний день тижня')
+  .argument('<day>', `День тижня: ${DAYS.join(', ')}`, parseDay)
+  .action((day, options, command) => {
+    const entries = getEntries(command).filter((e) => String(e.lesson.day).toLowerCase() === day);
+    printEntries(entries, `На ${DAYS_UA[day].toLowerCase()} занять немає.`);
+  });
+  program
+  .command('teacher')
+  .description('Показати заняття викладача (пошук за частиною імені)')
+  .argument('<name>', 'Частина імені викладача, наприклад melnyk')
+  .option('-o, --online-only', 'Показати лише дистанційні заняття')
+  .action((name, options, command) => {
+    const needle = name.toLowerCase();
+    let entries = getEntries(command).filter((e) =>
+      String(e.lesson.teacher ?? '').toLowerCase().includes(needle));
+    if (options.onlineOnly) entries = entries.filter((e) => e.lesson.format === 'online');
+    printEntries(entries, `Занять викладача "${name}" не знайдено.`);
+  });
+// ---------- Обробка помилок ----------
+
 function quoted(message) {
   return message.match(/'([^']+)'/)?.[1] ?? '';
 }
