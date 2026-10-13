@@ -1,0 +1,50 @@
+{
+  "group": "FEI-24",
+  "week": "2026-09-14 to 2026-09-20",
+  "lessons": [
+    {
+      "day": "Monday",
+      "date": "2026-09-14",
+      "startTime": "08:30",
+      "endTime": "09:50",
+      "subject": "Programming",
+      "teacher": "Olena Kovalenko",
+      "room": "205",
+      "format": "inPerson",
+      "weekType": "everyWeek"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-09-15",
+      "startTime": "10:10",
+      "endTime": "11:30",
+      "subject": "Mathematics",
+      "teacher": "Taras Melnyk",
+      "room": null,
+      "format": "online",
+      "weekType": "numerator"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-09-16",
+      "startTime": "11:50",
+      "endTime": "13:10",
+      "subject": "English",
+      "teacher": "Iryna Bondarenko",
+      "room": null,
+      "format": "online",
+      "weekType": "denominator"
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-09-17",
+      "startTime": "10:10",
+      "endTime": "11:30",
+      "subject": "Physics",
+      "teacher": "Maksym Shevchenko",
+      "room": "317",
+      "format": "inPerson",
+      "weekType": "everyWeek"
+    }
+  ]
+}
