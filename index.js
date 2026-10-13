@@ -127,6 +127,32 @@ program
   });
 
 // ---------- Обробка помилок ----------
+program
+  .command('show')
+  .description('Показати одне заняття повністю (за номером у файлі)')
+  .argument('<number>', 'Номер заняття (нумерація з 1, див. команду list)', parsePositiveInt)
+  .action((number, options, command) => {
+    const entries = getEntries(command);
+    const entry = entries.find((e) => e.number === number);
+    if (!entry) throw new CliError(`Заняття №${number} не існує (усього занять: ${entries.length}).`);
+    console.log(JSON.stringify(entry.lesson, null, 2));
+  });
+
+program
+  .command('field')
+  .description('Показати значення окремого поля заняття (шлях через крапку)')
+  .argument('<number>', 'Номер заняття (нумерація з 1)', parsePositiveInt)
+  .argument('<path>', 'Назва поля, наприклад teacher, room або startTime')
+  .action((number, path, options, command) => {
+    const entries = getEntries(command);
+    const entry = entries.find((e) => e.number === number);
+    if (!entry) throw new CliError(`Заняття №${number} не існує (усього занять: ${entries.length}).`);
+    const result = getByPath(entry.lesson, path);
+    if (!result.found) throw new CliError(`У занятті №${number} немає поля "${path}".`);
+    console.log(typeof result.value === 'object' && result.value !== null
+      ? JSON.stringify(result.value, null, 2)
+      : String(result.value));
+  });
 function quoted(message) {
   return message.match(/'([^']+)'/)?.[1] ?? '';
 }
